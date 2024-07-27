@@ -1,8 +1,8 @@
-name: "Linear.app Secret Scan"
+name: "Slack Secret Scan"
 
 on:
   schedule:
-    - cron: '0 15 * * 1'
+    - cron: '0 16 * * 1'
   workflow_dispatch:
 
 jobs:
@@ -10,12 +10,12 @@ jobs:
     permissions: write-all
     runs-on: [ubuntu-latest]
     steps:
-      - name: Scan Linear.app with n0s1-action
+      - name: Scan Slack with n0s1-action
         uses: spark1security/n0s1-action@main
         env:
-          LINEAR_TOKEN: ${{ secrets.LINEAR_TOKEN }}
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
         with:
-          scan-target: 'linear_scan'
+          scan-target: 'slack_scan'
           report-format: "sarif"
           report-file: "report.sarif"
       - name: Display SARIF result

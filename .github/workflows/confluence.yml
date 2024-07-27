@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  confluence_secret_scanning:
+  secret_scanning:
     permissions: write-all
     runs-on: [ubuntu-latest]
     steps:
