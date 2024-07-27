@@ -13,7 +13,7 @@ jobs:
       - name: Scan Jira with n0s1-action
         uses: spark1security/n0s1-action@main
         env:
-          JIRA_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
         with:
           scan-target: 'jira_scan'
           user-email: 'spark1tester@gmail.com'
