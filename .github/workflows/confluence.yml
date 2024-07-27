@@ -1,0 +1,30 @@
+name: "Confluence Secret Scan"
+
+on:
+  schedule:
+    - cron: '0 13 * * 1'
+  workflow_dispatch:
+
+jobs:
+  confluence_secret_scanning:
+    permissions: write-all
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Scan Confluence with n0s1-action
+        uses: spark1security/n0s1-action@main
+        env:
+          JIRA_TOKEN: ${{ secrets.JIRA_TOKEN }}
+        with:
+          scan-target: 'confluence_scan'
+          user-email: 'spark1tester@gmail.com'
+          platform-url: 'https://spark1us.atlassian.net'
+          report-format: "sarif"
+          report-file: "confluence_secret_report.sarif"
+      - name: Display SARIF result
+        run: |
+          cat confluence_secret_report.sarif | jq | head -n 20
+          cat confluence_secret_report.sarif | jq | tail -n 20
+      - name: Upload scan report to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "confluence_secret_report.sarif"
