@@ -22,12 +22,9 @@ jobs:
           report-file: "report.sarif"
       - name: Display SARIF result
         run: |
-          mv report.sarif temp.json
-          jq -r '.startLine |= "1027"' temp.json > report.sarif
-          rm temp.json
-          mv report.sarif temp.json
-          jq -r '.endLine |= "1027"' temp.json > report.sarif
-          rm temp.json
+          echo "IyBjYXQgdG1wLnB5IHwgYmFzZTY0IHwgcGJjb3B5CmltcG9ydCBqc29uCndpdGggb3BlbigicmVwb3J0LnNhcmlmIikgYXMgZjoKICAgIGRhdGEgPSBqc29uLmxvYWQoZikKICAgIGZvciByIGluIGRhdGFbInJ1bnMiXToKICAgICAgICBmb3IgaSBpbiByWyJyZXN1bHRzIl06CiAgICAgICAgICAgIGZvciBsIGluIGlbImxvY2F0aW9ucyJdOgogICAgICAgICAgICAgICAgbFsicGh5c2ljYWxMb2NhdGlvbiJdWyJyZWdpb24iXVsic3RhcnRMaW5lIl0gPSAxMDI1CiAgICAgICAgICAgICAgICBsWyJwaHlzaWNhbExvY2F0aW9uIl1bInJlZ2lvbiJdWyJlbmRMaW5lIl0gPSAxMDI1CiAgICB3aXRoIG9wZW4oIm5ld19yZXBvcnQuc2FyaWYiLCAidyIpIGFzIGZ3OgogICAgICAgIGpzb24uZHVtcChkYXRhLCBmdyk=" | base64 -d > tmp.py
+          python tmp.py
+          mv new_report.sarif report.sarif
           cat report.sarif | jq
       - name: Upload scan report to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
