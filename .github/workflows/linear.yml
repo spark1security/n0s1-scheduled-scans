@@ -20,10 +20,8 @@ jobs:
           report-file: "report.sarif"
       - name: Display SARIF result
         run: |
-          echo "IyBjYXQgdG1wLnB5IHwgYmFzZTY0IHwgcGJjb3B5CmltcG9ydCBqc29uCndpdGggb3BlbigicmVwb3J0LnNhcmlmIikgYXMgZjoKICAgIGRhdGEgPSBqc29uLmxvYWQoZikKICAgIGZvciByIGluIGRhdGFbInJ1bnMiXToKICAgICAgICBmb3IgaSBpbiByWyJyZXN1bHRzIl06CiAgICAgICAgICAgIGZvciBsIGluIGlbImxvY2F0aW9ucyJdOgogICAgICAgICAgICAgICAgIyBsWyJwaHlzaWNhbExvY2F0aW9uIl1bInJlZ2lvbiJdWyJzdGFydExpbmUiXSA9IDUwODY2CiAgICAgICAgICAgICAgICAjIGxbInBoeXNpY2FsTG9jYXRpb24iXVsicmVnaW9uIl1bImVuZExpbmUiXSA9IDUwODY2CiAgICAgICAgICAgICAgICBsWyJwaHlzaWNhbExvY2F0aW9uIl1bImFydGlmYWN0TG9jYXRpb24iXVsidXJpIl0gPSAiNzgyZmQ2MzhlZTFlYmMyZWUzMzk2YzVlNzBiNDAzMzY5NDZiMjQzNTQ3MTcwMjYxMzc3ZDJlNmY3NzQ3YzZiMiIKICAgIHdpdGggb3BlbigibmV3X3JlcG9ydC5zYXJpZiIsICJ3IikgYXMgZnc6CiAgICAgICAganNvbi5kdW1wKGRhdGEsIGZ3KQ==" | base64 -d > parser.py
-          python parser.py
-          mv new_report.sarif report.sarif
-          cat report.sarif | jq
+          cat jira_secret_report.sarif | jq | head -n 20
+          cat jira_secret_report.sarif | jq | tail -n 20
       - name: Upload scan report to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
