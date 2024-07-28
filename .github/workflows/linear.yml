@@ -1,6 +1,8 @@
 name: "Linear.app Secret Scan"
 
 on:
+  push:
+    branches: [ "sarif-test" ]
   schedule:
     - cron: '0 15 * * 1'
   workflow_dispatch:
@@ -20,8 +22,13 @@ jobs:
           report-file: "report.sarif"
       - name: Display SARIF result
         run: |
-          cat report.sarif | jq | head -n 20
-          cat report.sarif | jq | tail -n 20
+          mv report.sarif temp.json
+          jq -r '.startLine |= "1027"' temp.json > report.sarif
+          rm temp.json
+          mv report.sarif temp.json
+          jq -r '.endLine |= "1027"' temp.json > report.sarif
+          rm temp.json
+          cat report.sarif | jq
       - name: Upload scan report to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
