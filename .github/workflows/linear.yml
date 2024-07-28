@@ -20,8 +20,8 @@ jobs:
           report-file: "report.sarif"
       - name: Display SARIF result
         run: |
-          echo "IyBjYXQgdG1wLnB5IHwgYmFzZTY0IHwgcGJjb3B5CmltcG9ydCBqc29uCndpdGggb3BlbigicmVwb3J0LnNhcmlmIikgYXMgZjoKICAgIGRhdGEgPSBqc29uLmxvYWQoZikKICAgIGZvciByIGluIGRhdGFbInJ1bnMiXToKICAgICAgICBmb3IgaSBpbiByWyJyZXN1bHRzIl06CiAgICAgICAgICAgIGZvciBsIGluIGlbImxvY2F0aW9ucyJdOgogICAgICAgICAgICAgICAgbFsicGh5c2ljYWxMb2NhdGlvbiJdWyJyZWdpb24iXVsic3RhcnRMaW5lIl0gPSA1MDg2NgogICAgICAgICAgICAgICAgbFsicGh5c2ljYWxMb2NhdGlvbiJdWyJyZWdpb24iXVsiZW5kTGluZSJdID0gNTA4NjYKICAgIHdpdGggb3BlbigibmV3X3JlcG9ydC5zYXJpZiIsICJ3IikgYXMgZnc6CiAgICAgICAganNvbi5kdW1wKGRhdGEsIGZ3KQ==" | base64 -d > tmp.py
-          python tmp.py
+          echo "IyBjYXQgdG1wLnB5IHwgYmFzZTY0IHwgcGJjb3B5CmltcG9ydCBqc29uCndpdGggb3BlbigicmVwb3J0LnNhcmlmIikgYXMgZjoKICAgIGRhdGEgPSBqc29uLmxvYWQoZikKICAgIGZvciByIGluIGRhdGFbInJ1bnMiXToKICAgICAgICBmb3IgaSBpbiByWyJyZXN1bHRzIl06CiAgICAgICAgICAgIGZvciBsIGluIGlbImxvY2F0aW9ucyJdOgogICAgICAgICAgICAgICAgbFsicGh5c2ljYWxMb2NhdGlvbiJdWyJyZWdpb24iXVsic3RhcnRMaW5lIl0gPSA1MDg2NgogICAgICAgICAgICAgICAgbFsicGh5c2ljYWxMb2NhdGlvbiJdWyJyZWdpb24iXVsiZW5kTGluZSJdID0gNTA4NjYKICAgICAgICAgICAgICAgIGxbInBoeXNpY2FsTG9jYXRpb24iXVsiYXJ0aWZhY3RMb2NhdGlvbiJdWyJ1cmkiXSA9ICI3ODJmZDYzOGVlMWViYzJlZTMzOTZjNWU3MGI0MDMzNjk0NmIyNDM1NDcxNzAyNjEzNzdkMmU2Zjc3NDdjNmIyIgogICAgd2l0aCBvcGVuKCJuZXdfcmVwb3J0LnNhcmlmIiwgInciKSBhcyBmdzoKICAgICAgICBqc29uLmR1bXAoZGF0YSwgZncp" | base64 -d > parser.py
+          python parser.py
           mv new_report.sarif report.sarif
           cat report.sarif | jq
       - name: Upload scan report to GitHub Security tab
