@@ -11,10 +11,11 @@ on:
 
 jobs:
 
-  checkout_regex_file:
+  linear_secret_scanning:
     permissions: write-all
     runs-on: [ubuntu-latest]
     steps:
+
       - name: Checkout customized regex file
         uses: actions/checkout@v3
         with:
@@ -22,10 +23,6 @@ jobs:
           sparse-checkout: |
             .github/workflows/config/my_regex.toml
 
-  linear_secret_scanning:
-    permissions: write-all
-    runs-on: [ubuntu-latest]
-    steps:
       - name: Scan Linear.app with custom regex
         uses: spark1security/n0s1-action@main
         env:
@@ -49,6 +46,14 @@ jobs:
     permissions: write-all
     runs-on: [ ubuntu-latest ]
     steps:
+
+      - name: Checkout customized regex file
+        uses: actions/checkout@v3
+        with:
+          ref: main
+          sparse-checkout: |
+            .github/workflows/config/my_regex.toml
+
       - name: Scan Jira with custom regex
         uses: spark1security/n0s1-action@main
         env:
