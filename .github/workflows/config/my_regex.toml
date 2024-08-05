@@ -1,0 +1,30 @@
+# Sample customized regex file based on n0s1's default regex config
+# The default n0s1 regex config can be found at:
+# https://github.com/spark1security/n0s1/blob/main/src/n0s1/config/regex.toml
+title = "custom regex file for n0s1"
+
+
+[[rules]]
+id = "plaintext_password"
+description = "Plaintext Password"
+regex = '''(?i)password ?[=:] ?.*'''
+keywords = ["password"]
+
+
+[[rules]]
+id = "AWS"
+description = "AWS Access Token"
+regex = '''AKIA[0-9A-Z]{16}'''
+tags = ["aws", "revocation_type"]
+keywords = [
+    "akia",
+]
+
+
+[[rules]]
+id = "SSH private key"
+description = "SSH private key"
+regex = '''-----BEGIN OPENSSH PRIVATE KEY-----'''
+keywords = [
+    "begin openssh private key",
+]
