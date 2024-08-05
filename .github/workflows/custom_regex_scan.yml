@@ -34,8 +34,8 @@ jobs:
           regex-file: ".github/workflows/config/my_regex.toml"
       - name: Display SARIF result
         run: |
-          cat jira_secret_report.sarif | jq | head -n 10
-          cat jira_secret_report.sarif | jq | tail -n 50
+          cat report.sarif | jq | head -n 10
+          cat report.sarif | jq | tail -n 50
       - name: Upload scan report to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
