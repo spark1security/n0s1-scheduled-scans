@@ -26,3 +26,11 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: "report.sarif"
+      - name: Create JIRA tickets for n0s1 findings
+        uses: GeorgeDavis-Ibexlabs/publish-sarif-to-jira@v0.0.12
+        with:
+          jira_cloud_url: "https://spark1us.atlassian.net"
+          jira_auth_email: "marcelo@spark1.us"
+          jira_project_key: "DLP"
+          jira_api_token: ${{ secrets.JIRA_TOKEN }}
+          jira_default_issue_labels: "n0s1,credential-leak"
