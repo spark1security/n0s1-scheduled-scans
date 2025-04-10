@@ -1,6 +1,9 @@
 name: "GitHub repo Secret Scan"
 
 on:
+  push:
+    branches:
+      - ms/github-scan
   workflow_dispatch:
 
 jobs:
