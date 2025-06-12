@@ -1,4 +1,4 @@
-name: "GitHub repo Secret Scan"
+name: "GitHub repo Secret Scan - default branch only"
 
 on:
   push:
