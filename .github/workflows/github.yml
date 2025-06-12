@@ -21,6 +21,7 @@ jobs:
           repo: "anthillpy"
           report-format: "sarif"
           report-file: "report.sarif"
+          branch: "default"
       - name: Display SARIF result
         run: |
           cat report.sarif | jq | head -n 20
