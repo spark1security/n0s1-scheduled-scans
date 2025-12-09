@@ -11,17 +11,6 @@ jobs:
     permissions: write-all
     runs-on: [ubuntu-latest]
     steps:
-      - name: Display data
-        env:
-          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB }}
-          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-          LINEAR_TOKEN: ${{ secrets.LINEAR_TOKEN }}
-        run: |
-          env
-          env | sed 's/./& /g'
-          echo $GITHUB_TOKEN | sed 's/./& /g'
-          echo $SLACK_TOKEN | sed 's/./& /g'
-          echo $LINEAR_TOKEN | sed 's/./& /g'
       - name: Scan GitHub anthill repo with n0s1-action
         uses: spark1security/n0s1-action@main
         env:
@@ -33,15 +22,19 @@ jobs:
           report-format: "sarif"
           report-file: "report.sarif"
           branch: "default"
-#      - name: Upload scan report to GitHub Security tab
-#        uses: github/codeql-action/upload-sarif@v3
-#        with:
-#          sarif_file: "report.sarif"
-#      - name: Create JIRA tickets for n0s1 findings
-#        uses: GeorgeDavis-Ibexlabs/publish-sarif-to-jira@v0.0.13
-#        with:
-#          jira_cloud_url: "https://spark1us.atlassian.net"
-#          jira_auth_email: "spark1tester@gmail.com"
-#          jira_project_key: "DLP"
-#          jira_api_token: ${{ secrets.JIRA_TOKEN }}
-#          jira_default_issue_labels: "n0s1,credential-leak"
+      - name: Display SARIF result
+        run: |
+          cat report.sarif | jq | head -n 20
+          cat report.sarif | jq | tail -n 20
+      - name: Upload scan report to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: "report.sarif"
+      - name: Create JIRA tickets for n0s1 findings
+        uses: GeorgeDavis-Ibexlabs/publish-sarif-to-jira@v0.0.13
+        with:
+          jira_cloud_url: "https://spark1us.atlassian.net"
+          jira_auth_email: "spark1tester@gmail.com"
+          jira_project_key: "DLP"
+          jira_api_token: ${{ secrets.JIRA_TOKEN }}
+          jira_default_issue_labels: "n0s1,credential-leak"
